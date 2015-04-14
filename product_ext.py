@@ -30,4 +30,11 @@ class product_product(osv.Model):
 	}
 product_product()
 
+
+class res_partner(osv.Model):
+    _inherit = 'res.partner'
+
+    _columns = {
+        'is_odoo_partner':fields.boolean('Created From Odoo'),
+    }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

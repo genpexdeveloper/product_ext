@@ -26,7 +26,7 @@
     'author': 'Genpex',
     'description' : 'This module help to search the product by internal reference(Product Default Code).',
     'website': 'http://www.genpex.com',
-    'depends': ['base', 'product'],
+    'depends': ['base', 'product','sale'],
     'data': ['product_ext_view.xml'],
     'demo': [],
     'test': [],

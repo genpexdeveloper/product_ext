@@ -23,6 +23,50 @@
                 </field>
 			</field>
 		</record>
-
+		
+		<record id="view_res_partner_form_extended" model="ir.ui.view">
+			<field name="name">res.partner.extened</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//notebook/page[@string='Sales &amp; Purchases']//field[@name='supplier']" position="after">
+			    	<field name="is_odoo_partner"/>
+			    </xpath>
+			</field>
+		</record>
+		
+		<record id="action_magento_customer_form" model="ir.actions.act_window">
+			<field name="name">Magento Customer</field>
+			<field name="res_model">res.partner</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('is_odoo_partner','!=',True)]</field>
+			<field name="context">{"search_default_customer":1}</field>
+		</record>
+		
+		<record id="base.action_partner_form" model="ir.actions.act_window">
+            <field name="name">Odoo Customers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('is_odoo_partner','=',True)]</field>
+            <field name="context">{"search_default_customer":1}</field>
+            <field name="search_view_id" ref="base.view_res_partner_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a contact in your address book.
+              </p><p>
+                Odoo helps you easily track all activities related to
+                a customer; discussions, history of business opportunities,
+                documents, etc.
+              </p>
+            </field>
+        </record>
+		
+		<menuitem id="base.menu_partner_form" parent="base.menu_sales" action="base.action_partner_form" sequence="2"/>
+		
+		<menuitem id="menu_magento_customer" action="action_magento_customer_form" name="Magento Customer" parent="base.menu_sales"/>
+		
     </data>
 </openerp>
